@@ -8527,9 +8527,9 @@ async function run() {
     const context = github.context;
     // await label_approved(octokit, context);
     const { data: pullRequest } = await octokit.rest.pulls.get({
-      owner: context.repo.owner,
-      repo: context.repo,
-      pull_number: context.issue.number,
+      ...context.repo.owner,
+      ...context.repo,
+      ...context.issue.number,
     });
   } catch (error) {
     core.setFailed(JSON.stringify(error));
