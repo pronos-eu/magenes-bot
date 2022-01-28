@@ -1,7 +1,7 @@
 const core = require('@actions/core');
 
 export const loglistReviews = async (octokit, context) => {
-    core.info(context)
+    core.info(JSON.stringify(context))
     const result = await octokit.rest.pulls.listReviews({
         ...context.owner,
         ...context.repo,

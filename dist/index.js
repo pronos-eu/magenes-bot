@@ -8310,7 +8310,7 @@ function wrappy (fn, cb) {
 const core = __nccwpck_require__(2186);
 
 const loglistReviews = async (octokit, context) => {
-    core.info(context)
+    core.info(JSON.stringify(context))
     const result = await octokit.rest.pulls.listReviews({
         ...context.owner,
         ...context.repo,
