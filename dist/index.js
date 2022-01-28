@@ -8527,7 +8527,7 @@ async function run() {
     const context = github.context;
     // await label_approved(octokit, context);
     const { data: pullRequest } = await octokit.rest.pulls.get({
-      ...context.repo.owner,
+      owner: "pronos-eu",
       ...context.repo,
       ...context.issue.number,
     });
