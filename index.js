@@ -1,18 +1,13 @@
 const core = require('@actions/core');
-const wait = require('./wait');
-
+const github = require('@actions/github');
+const label_approved = require('plugins/label_approved.js').default
 
 // most @actions toolkit packages have async methods
 async function run() {
   try {
-    const ms = core.getInput('milliseconds');
-    core.info(`Waiting ${ms} milliseconds ...`);
-
-    core.debug((new Date()).toTimeString()); // debug is only output if you set the secret `ACTIONS_RUNNER_DEBUG` to true
-    await wait(parseInt(ms));
-    core.info((new Date()).toTimeString());
-
-    core.setOutput('time', new Date().toTimeString());
+    const myToken = core.getInput('myToken');
+    const context = github.context;
+    label_approved();
   } catch (error) {
     core.setFailed(error.message);
   }
