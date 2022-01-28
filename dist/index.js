@@ -8525,7 +8525,12 @@ async function run() {
     const myToken = core.getInput('githubToken');
     const octokit = github.getOctokit(myToken)
     const context = github.context;
-    await label_approved(octokit, context);
+    // await label_approved(octokit, context);
+    const { data: pullRequest } = await octokit.rest.pulls.get({
+      owner: context.repo.owner,
+      repo: context.repo,
+      pull_number: context.issue.number,
+    });
   } catch (error) {
     core.setFailed(error);
   }
