@@ -8307,6 +8307,8 @@ function wrappy (fn, cb) {
 /* harmony export */   "Z": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* unused harmony export loglistReviews */
+const core = __nccwpck_require__(2186);
+
 const loglistReviews = async (octokit, context) => {
     core.info(context)
     const result = await octokit.rest.pulls.listReviews({
