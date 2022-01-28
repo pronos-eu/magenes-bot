@@ -8307,10 +8307,10 @@ module.exports = eval("require")("encoding");
 
 /***/ }),
 
-/***/ 7586:
+/***/ 6093:
 /***/ ((module) => {
 
-module.exports = eval("require")("plugins/label_approved.js");
+module.exports = eval("require")("plugins/label_approved");
 
 
 /***/ }),
@@ -8478,7 +8478,7 @@ var __webpack_exports__ = {};
 (() => {
 const core = __nccwpck_require__(2186);
 const github = __nccwpck_require__(5438);
-const label_approved = __nccwpck_require__(7586).default
+const label_approved = __nccwpck_require__(6093).default
 
 async function run() {
   try {
