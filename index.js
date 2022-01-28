@@ -9,7 +9,7 @@ async function run() {
     const context = github.context;
     await label_approved(octokit, context);
   } catch (error) {
-    core.setFailed(error.message);
+    core.setFailed(error);
   }
 }
 
