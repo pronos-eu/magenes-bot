@@ -1,4 +1,4 @@
-export const loglistReviews = async (octokit) => {
+export const loglistReviews = async (octokit, context) => {
     const result = await octokit.rest.pulls.listReviews({
         ...context.owner,
         ...context.repo,

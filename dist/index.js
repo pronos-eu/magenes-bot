@@ -8307,7 +8307,7 @@ function wrappy (fn, cb) {
 /* harmony export */   "Z": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* unused harmony export loglistReviews */
-const loglistReviews = async (octokit) => {
+const loglistReviews = async (octokit, context) => {
     const result = await octokit.rest.pulls.listReviews({
         ...context.owner,
         ...context.repo,
@@ -8515,7 +8515,7 @@ async function run() {
     const myToken = core.getInput('githubToken');
     const octokit = github.getOctokit(myToken)
     const context = github.context;
-    await label_approved(octokit);
+    await label_approved(octokit, context);
   } catch (error) {
     core.setFailed(error.message);
   }

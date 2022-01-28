@@ -7,7 +7,7 @@ async function run() {
     const myToken = core.getInput('githubToken');
     const octokit = github.getOctokit(myToken)
     const context = github.context;
-    await label_approved(octokit);
+    await label_approved(octokit, context);
   } catch (error) {
     core.setFailed(error.message);
   }
