@@ -7,23 +7,12 @@ export const loglistReviews = async (octokit, context) => {
     //     ...context.repo.repo,
     //     ...context.issue.number,
     // })
-    const newIssue = await octokit.rest.issues.create({
+    const result = await octokit.rest.issues.create({
         ...context.repo,
         title: 'New issue!',
         body: 'Hello Universe!'
     });
     core.info(result);
 }
-
-const { data: pullRequest } = await octokit.rest.pulls.get({
-    owner: 'octokit',
-    repo: 'rest.js',
-    pull_number: 123,
-    mediaType: {
-        format: 'diff'
-    }
-});
-
-console.log(pullRequest);
 
 export default loglistReviews
