@@ -14,7 +14,7 @@ async function run() {
       pull_number: context.issue.number,
     });
   } catch (error) {
-    core.setFailed(error);
+    core.setFailed(JSON.stringify(error));
   }
 }
 
