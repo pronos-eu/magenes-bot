@@ -4,6 +4,10 @@ inputs:
   myToken: 
     description: 'GitHub token used for authentication'
     required: true
+  labelerTrigger:
+    description: 'Run labeler module'
+    required: false
+    default: false
 # outputs:
 #   time: # output will be available to future steps
 #     description: 'The current time after waiting'
