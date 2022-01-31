@@ -8327,8 +8327,7 @@ const parseReviews = (json_input) => {
         list_of_reviews.push({ reviewer: reviewer, state: state })
     }
     unique_reviews = Array.from(new Set(list_of_reviews.map(({ reviewer }) => reviewer)));
-    core.info(JSON.stringify(unique_reviews))
-
+    return unique_reviews
 }
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (loglistReviews);
