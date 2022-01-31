@@ -8315,6 +8315,7 @@ const loglistReviews = async (octokit, context) => {
         repo: context.repo.repo,
         pull_number: context.issue.number
     })
+    core.info(JSON.stringify(result))
     const parsedReviews = parseReviews(result)
     core.info(JSON.stringify(parsedReviews));
 }
