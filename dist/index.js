@@ -8517,10 +8517,15 @@ async function run() {
   try {
     const myToken = core.getInput('myToken');
     const labelerTrigger = core.getInput('labelerTrigger')
+    const testTrigger = false
     const octokit = github.getOctokit(myToken)
     const context = github.context;
-    core.info(labelerTrigger)
+    core.info("labererTrigger", labelerTrigger)
     if (labelerTrigger != false) {
+      await label_approved(octokit, context);
+    }
+    core.info("testTrigger", testTrigger)
+    if (testTrigger != false) {
       await label_approved(octokit, context);
     }
   } catch (error) {
