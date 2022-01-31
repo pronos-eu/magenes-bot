@@ -17,9 +17,9 @@ async function run() {
         const state = json_input[i].state;
         list_of_reviews.push({ [reviewer]: state })
       }
-      // const unique_reviews = [...new Set(list_of_reviews.map(item => item.reviewer))];
-      // return unique_reviews
-      return list_of_reviews
+      const unique_reviews = [...new Set(list_of_reviews.map(item => item.reviewer))];
+      core.info(unique_reviews)
+
     }
   } catch (error) {
     core.setFailed(JSON.stringify(error));
