@@ -17,8 +17,9 @@ const parseReviews = (json_input) => {
         const state = json_input[i].state;
         list_of_reviews.push({ reviewer: reviewer, state: state })
     }
-    unique_reviews = Array.from(new Set(list_of_reviews.map(({ reviewer }) => reviewer)));
-    return unique_reviews
+    // unique_reviews = Array.from(new Set(list_of_reviews.map(({ reviewer }) => reviewer)));
+    // return unique_reviews
+    return list_of_reviews
 }
 
 export default loglistReviews
