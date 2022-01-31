@@ -8329,7 +8329,7 @@ const parseReviews = (json_input) => {
             list_of_reviews.push(reviewer)
         }
     }
-    return unique_reviews
+    return list_of_reviews
 }
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (loglistReviews);
