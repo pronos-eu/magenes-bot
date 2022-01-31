@@ -16,7 +16,7 @@ const parseReviews = (json_input) => {
     for (var i = 0; i < json_input.length; i++) {
         const reviewer = json_input[i].user.login;
         const state = json_input[i].state;
-        if (state == "APPROVED" && list_of_reviews.includes(reviewer)) {
+        if (state == "APPROVED" && !list_of_reviews.includes(reviewer)) {
             list_of_reviews.push(reviewer)
         }
     }
