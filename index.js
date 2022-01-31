@@ -10,16 +10,7 @@ async function run() {
     const labelerTrigger = core.getInput('labelerTrigger') === 'true';
 
     if (labelerTrigger) {
-      const json_input = await label_approved(octokit, context);
-      list_of_reviews = []
-      for (var i = 0; i < json_input.length; i++) {
-        const reviewer = json_input[i].user.login;
-        const state = json_input[i].state;
-        list_of_reviews.push({ reviewer: reviewer, state: state })
-      }
-      unique_reviews = Array.from(new Set(list_of_reviews.map(({ reviewer }) => reviewer)));
-      core.info(JSON.stringify(unique_reviews))
-
+      await label_approved(octokit, context);
     }
   } catch (error) {
     core.setFailed(JSON.stringify(error));

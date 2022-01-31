@@ -6,9 +6,8 @@ export const loglistReviews = async (octokit, context) => {
         repo: context.repo.repo,
         pull_number: context.issue.number
     })
-    return result
-    // core.info(JSON.stringify(result));
-    core.info(JSON.stringify(parseReviews(result)));
+    const parsedReviews = parseReviews(result)
+    core.info(JSON.stringify(parsedReviews));
 }
 
 const parseReviews = (json_input) => {
@@ -16,11 +15,11 @@ const parseReviews = (json_input) => {
     for (var i = 0; i < json_input.length; i++) {
         const reviewer = json_input[i].user.login;
         const state = json_input[i].state;
-        list_of_reviews.push({ [reviewer]: state })
+        list_of_reviews.push({ reviewer: reviewer, state: state })
     }
-    // const unique_reviews = [...new Set(list_of_reviews.map(item => item.reviewer))];
-    // return unique_reviews
-    return list_of_reviews
+    unique_reviews = Array.from(new Set(list_of_reviews.map(({ reviewer }) => reviewer)));
+    core.info(JSON.stringify(unique_reviews))
+
 }
 
 export default loglistReviews
