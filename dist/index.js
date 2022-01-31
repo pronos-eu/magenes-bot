@@ -8304,9 +8304,9 @@ function wrappy (fn, cb) {
 
 "use strict";
 /* harmony export */ __nccwpck_require__.d(__webpack_exports__, {
-/* harmony export */   "ZP": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */   "Z": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* unused harmony exports loglistReviews, parseReviews */
+/* unused harmony export loglistReviews */
 const core = __nccwpck_require__(2186);
 
 const loglistReviews = async (octokit, context) => {
@@ -8326,8 +8326,9 @@ const parseReviews = (json_input) => {
         const state = json_input[i].state;
         list_of_reviews.push({ [reviewer]: state })
     }
-    const unique_reviews = [...new Set(list_of_reviews.map(item => item.reviewer))];
-    return unique_reviews
+    return list_of_reviews
+    // const unique_reviews = [...new Set(list_of_reviews.map(item => item.reviewer))];
+    // return unique_reviews
 }
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (loglistReviews);
@@ -8522,7 +8523,7 @@ var __webpack_exports__ = {};
 (() => {
 const core = __nccwpck_require__(2186);
 const github = __nccwpck_require__(5438);
-const label_approved = __nccwpck_require__(2646)/* .default */ .ZP
+const label_approved = __nccwpck_require__(2646)/* .default */ .Z
 
 async function run() {
   try {
