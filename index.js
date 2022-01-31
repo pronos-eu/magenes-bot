@@ -13,6 +13,7 @@ async function run() {
       ...context.repo
       // ...context.issue.number,
     });
+    core.info(pullRequest);
   } catch (error) {
     core.setFailed(JSON.stringify(error));
   }
