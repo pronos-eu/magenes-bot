@@ -8310,20 +8310,13 @@ function wrappy (fn, cb) {
 const core = __nccwpck_require__(2186);
 
 const loglistReviews = async (octokit, context) => {
-    core.info(JSON.stringify({ owner: context.repo.owner, repo: context.repo.repo, pull: context.issue.number }))
-    const newIssue = await octokit.rest.issues.create({
-        ...context.repo,
-        title: 'New issue!',
-        body: 'Hello Universe!'
-    });
 
-    core.info(newIssue)
-    // const result = await octokit.pulls.get({
-    //     ...context.repo.owner,
-    //     ...context.repo,
-    //     ...context.issue.number,
-    // })
-    // core.info(result);
+    const { data: result } = await octokit.pulls.get({
+        owner: 'pronos-eu',
+        repo: context.repo.repo,
+        pull_number: context.issue.number
+    })
+    core.info(JSON.stringify(result));
 }
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (loglistReviews);
@@ -8525,18 +8518,14 @@ async function run() {
     const myToken = core.getInput('myToken');
     const octokit = github.getOctokit(myToken)
     const context = github.context;
-    // await label_approved(octokit, context);
-    //  await ({
-    //   owner: "pronos-eu",
-    //   ...context.repo,
-    //   ...context.issue.number,
+    await label_approved(octokit, context);
+
+    // const { data: pullRequest } = await octokit.request('GET /repos/{owner}/{repo}/pulls/{pull_number}', {
+    //   owner: 'pronos-eu',
+    //   repo: context.repo.repo,
+    //   pull_number: context.issue.number
     // });
-    const { data: pullRequest } = await octokit.request('GET /repos/{owner}/{repo}/pulls/{pull_number}', {
-      owner: 'pronos-eu',
-      repo: context.repo.repo,
-      pull_number: context.issue.number
-    });
-    core.info(JSON.stringify(pullRequest));
+    // core.info(JSON.stringify(pullRequest));
   } catch (error) {
     core.setFailed(JSON.stringify(error));
   }

@@ -7,18 +7,14 @@ async function run() {
     const myToken = core.getInput('myToken');
     const octokit = github.getOctokit(myToken)
     const context = github.context;
-    // await label_approved(octokit, context);
-    //  await ({
-    //   owner: "pronos-eu",
-    //   ...context.repo,
-    //   ...context.issue.number,
+    await label_approved(octokit, context);
+
+    // const { data: pullRequest } = await octokit.request('GET /repos/{owner}/{repo}/pulls/{pull_number}', {
+    //   owner: 'pronos-eu',
+    //   repo: context.repo.repo,
+    //   pull_number: context.issue.number
     // });
-    const { data: pullRequest } = await octokit.request('GET /repos/{owner}/{repo}/pulls/{pull_number}', {
-      owner: 'pronos-eu',
-      repo: context.repo.repo,
-      pull_number: context.issue.number
-    });
-    core.info(JSON.stringify(pullRequest));
+    // core.info(JSON.stringify(pullRequest));
   } catch (error) {
     core.setFailed(JSON.stringify(error));
   }
