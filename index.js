@@ -18,7 +18,7 @@ async function run() {
         list_of_reviews.push({ [reviewer]: state })
       }
       const unique_reviews = [...new Set(list_of_reviews.map(item => item.reviewer))];
-      core.info(list_of_reviews)
+      core.info(JSON.stringify(list_of_reviews))
 
     }
   } catch (error) {
