@@ -8533,7 +8533,7 @@ async function run() {
     // });
     const { data: pullRequest } = await octokit.request('GET /repos/{owner}/{repo}/pulls/{pull_number}', {
       owner: 'pronos-eu',
-      repo: context.repo,
+      repo: context.repo.repo,
       pull_number: context.issue.number
     });
     core.info(pullRequest);
