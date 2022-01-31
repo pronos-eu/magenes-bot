@@ -8526,10 +8526,10 @@ async function run() {
     const octokit = github.getOctokit(myToken)
     const context = github.context;
     // await label_approved(octokit, context);
-    const { data: pullRequest } = await octokit.rest.pulls.list({
+    const { data: pullRequest } = await octokit.rest.pulls.get({
       owner: "pronos-eu",
-      ...context.repo
-      // ...context.issue.number,
+      ...context.repo,
+      ...context.issue.number,
     });
     core.info(pullRequest);
   } catch (error) {
