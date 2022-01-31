@@ -8315,26 +8315,21 @@ const loglistReviews = async (octokit, context) => {
         repo: context.repo.repo,
         pull_number: context.issue.number
     })
+    return result
     // core.info(JSON.stringify(result));
     core.info(JSON.stringify(parseReviews(result)));
 }
 
 const parseReviews = (json_input) => {
-    try {
-        list_of_reviews = []
-        for (var i = 0; i < json_input.length; i++) {
-            const reviewer = json_input[i].user.login;
-            const state = json_input[i].state;
-            list_of_reviews.push({ [reviewer]: state })
-        }
-        // const unique_reviews = [...new Set(list_of_reviews.map(item => item.reviewer))];
-        // return unique_reviews
-        return list_of_reviews
-    } catch (error) {
-        core.setFailed(JSON.stringify(error));
+    list_of_reviews = []
+    for (var i = 0; i < json_input.length; i++) {
+        const reviewer = json_input[i].user.login;
+        const state = json_input[i].state;
+        list_of_reviews.push({ [reviewer]: state })
     }
-
-
+    // const unique_reviews = [...new Set(list_of_reviews.map(item => item.reviewer))];
+    // return unique_reviews
+    return list_of_reviews
 }
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (loglistReviews);
@@ -8537,9 +8532,18 @@ async function run() {
     const octokit = github.getOctokit(myToken);
     const context = github.context;
     const labelerTrigger = core.getInput('labelerTrigger') === 'true';
-    core.info(labelerTrigger)
+
     if (labelerTrigger) {
-      await label_approved(octokit, context);
+      const json_input = await label_approved(octokit, context);
+      list_of_reviews = []
+      for (var i = 0; i < json_input.length; i++) {
+        const reviewer = json_input[i].user.login;
+        const state = json_input[i].state;
+        list_of_reviews.push({ [reviewer]: state })
+      }
+      // const unique_reviews = [...new Set(list_of_reviews.map(item => item.reviewer))];
+      // return unique_reviews
+      return list_of_reviews
     }
   } catch (error) {
     core.setFailed(JSON.stringify(error));
