@@ -1,7 +1,7 @@
 name: 'Label approved'
 description: 'Label approved merge requests'
 inputs:
-  githubToken: 
+  myToken: 
     description: 'GitHub token used for authentication'
     required: true
 # outputs:

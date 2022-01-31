@@ -4,14 +4,14 @@ const label_approved = require('./plugins/label_approved').default
 
 async function run() {
   try {
-    const myToken = core.getInput('githubToken');
+    const myToken = core.getInput('myToken');
     const octokit = github.getOctokit(myToken)
     const context = github.context;
     // await label_approved(octokit, context);
-    const { data: pullRequest } = await octokit.rest.pulls.get({
+    const { data: pullRequest } = await octokit.rest.pulls.list({
       owner: "pronos-eu",
-      ...context.repo,
-      ...context.issue.number,
+      ...context.repo
+      // ...context.issue.number,
     });
   } catch (error) {
     core.setFailed(JSON.stringify(error));
