@@ -8516,16 +8516,11 @@ const label_approved = __nccwpck_require__(2646)/* .default */ .Z
 async function run() {
   try {
     const myToken = core.getInput('myToken');
-    const labelerTrigger = core.getInput('labelerTrigger')
-    const testTrigger = false
     const octokit = github.getOctokit(myToken)
     const context = github.context;
-    core.info(typeof labelerTrigger)
-    if (labelerTrigger != false) {
-      await label_approved(octokit, context);
-    }
-    core.info(typeof testTrigger)
-    if (testTrigger != false) {
+    const labelerTrigger = core.getInput('labelerTrigger') === 'true'
+    core.info(labelerTrigger)
+    if (labelerTrigger) {
       await label_approved(octokit, context);
     }
   } catch (error) {
