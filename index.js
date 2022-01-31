@@ -9,7 +9,7 @@ async function run() {
     const octokit = github.getOctokit(myToken)
     const context = github.context;
     core.info(labelerTrigger)
-    if (Boolean(labelerTrigger)) {
+    if (labelerTrigger != false) {
       await label_approved(octokit, context);
     }
   } catch (error) {
