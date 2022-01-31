@@ -8536,7 +8536,8 @@ async function run() {
       await label_approved(octokit, context);
     }
   } catch (error) {
-    core.setFailed(JSON.stringify(error));
+    // core.setFailed(JSON.stringify(error));
+    core.setFailed(error.message)
   }
 }
 
