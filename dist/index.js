@@ -8320,15 +8320,14 @@ const loglistReviews = async (octokit, context) => {
 }
 
 const parseReviews = (json_input) => {
-    list_of_reviews = [];
+    const list_of_reviews = [];
     for (var i = 0; i < json_input.length; i++) {
         const reviewer = json_input[i].user.login;
         const state = json_input[i].state;
         list_of_reviews.push({ reviewer: reviewer, state: state })
     }
-    // unique_reviews = Array.from(new Set(list_of_reviews.map(({ reviewer }) => reviewer)));
-    // return unique_reviews
-    return list_of_reviews
+    const unique_reviews = Array.from(new Set(list_of_reviews.map(({ reviewer }) => reviewer)));
+    return unique_reviews
 }
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (loglistReviews);
