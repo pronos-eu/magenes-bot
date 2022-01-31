@@ -8541,7 +8541,7 @@ async function run() {
         const state = json_input[i].state;
         list_of_reviews.push({ [reviewer]: state })
       }
-      const unique_reviews = [...new Set(list_of_reviews.map(item => item.reviewer))];
+      unique_reviews = Array.from(new Set(list_of_reviews.map(({ reviewer }) => reviewer)));
       core.info(JSON.stringify(unique_reviews))
 
     }
