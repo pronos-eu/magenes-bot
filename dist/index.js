@@ -8536,7 +8536,7 @@ async function run() {
       repo: context.repo.repo,
       pull_number: context.issue.number
     });
-    core.info(pullRequest);
+    core.info(JSON.stringify(pullRequest));
   } catch (error) {
     core.setFailed(JSON.stringify(error));
   }
