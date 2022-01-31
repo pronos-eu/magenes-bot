@@ -11,7 +11,7 @@ export const loglistReviews = async (octokit, context) => {
 }
 
 const parseReviews = (json_input) => {
-    list_of_reviews = []
+    list_of_reviews = [];
     for (var i = 0; i < json_input.length; i++) {
         const reviewer = json_input[i].user.login;
         const state = json_input[i].state;
