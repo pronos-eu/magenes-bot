@@ -8336,11 +8336,8 @@ const parseReviews = (jsonInput) => {
         const reviewer = jsonInput[i].user.login;
         const state = jsonInput[i].state;
         const timestamp = jsonInput[i].submitted_at;
-        if (listOfReviews.some(item => item.reviewer === reviewer)) {
-            item = { reviewer: reviewer, state: state, timestamp: timestamp }
-        } else {
-            listOfReviews.push({ reviewer: reviewer, state: state, timestamp: timestamp });
-        }
+        listOfReviews.push({ reviewer: reviewer, state: state, timestamp: timestamp });
+
         // if (state == "APPROVED" && !listOfReviews.includes(reviewer)) {
 
         //     listOfReviews.push({ reviewer: reviewer, state: state, timestamp: timestamp });
