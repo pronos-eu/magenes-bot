@@ -35,7 +35,7 @@ const labelPullRequest = async (octokit, context) => {
         owner: context.repo.owner,
         repo: context.repo.repo,
         issue_number: context.issue.number,
-        labels: "approved"
+        labels: ["approved"]
     })
     core.info(JSON.stringify(result))
 }
