@@ -1,13 +1,20 @@
-name: 'Wait'
-description: 'Wait a designated number of milliseconds'
+name: 'Label approved'
+description: 'Label approved merge requests'
 inputs:
-  milliseconds:  # id of input
-    description: 'number of milliseconds to wait'
+  myToken: 
+    description: 'GitHub token used for authentication'
     required: true
-    default: '1000'
-outputs:
-  time: # output will be available to future steps
-    description: 'The current time after waiting'
+  labelerTrigger:
+    description: 'Run labeler module'
+    required: false
+    default: false
+  labelerApproves:
+    description: 'Number of approves required to label a Pull Request (Labeler module)'
+    required: false
+    default: 2
+# outputs:
+#   time: # output will be available to future steps
+#     description: 'The current time after waiting'
 runs:
   using: 'node12'
   main: 'dist/index.js'

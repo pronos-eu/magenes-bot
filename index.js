@@ -1,20 +1,20 @@
 const core = require('@actions/core');
-const wait = require('./wait');
+const github = require('@actions/github');
+const label_approved = require('./plugins/label_approved').default
 
-
-// most @actions toolkit packages have async methods
 async function run() {
   try {
-    const ms = core.getInput('milliseconds');
-    core.info(`Waiting ${ms} milliseconds ...`);
+    const myToken = core.getInput('myToken');
+    const octokit = github.getOctokit(myToken);
+    const context = github.context;
+    const labelerTrigger = core.getInput('labelerTrigger') === 'true';
 
-    core.debug((new Date()).toTimeString()); // debug is only output if you set the secret `ACTIONS_RUNNER_DEBUG` to true
-    await wait(parseInt(ms));
-    core.info((new Date()).toTimeString());
-
-    core.setOutput('time', new Date().toTimeString());
+    if (labelerTrigger) {
+      const numberOfApproves = parseInt(core.getInput('labelerApproves'));
+      await label_approved(octokit, context, numberOfApproves);
+    }
   } catch (error) {
-    core.setFailed(error.message);
+    core.setFailed(error.message)
   }
 }
 
