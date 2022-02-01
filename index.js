@@ -10,7 +10,8 @@ async function run() {
     const labelerTrigger = core.getInput('labelerTrigger') === 'true';
 
     if (labelerTrigger) {
-      await label_approved(octokit, context);
+      const numberOfApproves = parseInt(core.getInput('labelerApproves'));
+      await label_approved(octokit, context, numberOfApproves);
     }
   } catch (error) {
     // core.setFailed(JSON.stringify(error));

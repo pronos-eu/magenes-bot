@@ -8,6 +8,10 @@ inputs:
     description: 'Run labeler module'
     required: false
     default: false
+  labelerApproves:
+    description: 'Number of approves required to label a Pull Request (Labeler module)'
+    required: false
+    default: 2
 # outputs:
 #   time: # output will be available to future steps
 #     description: 'The current time after waiting'

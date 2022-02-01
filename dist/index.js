@@ -8306,33 +8306,49 @@ function wrappy (fn, cb) {
 /* harmony export */ __nccwpck_require__.d(__webpack_exports__, {
 /* harmony export */   "Z": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* unused harmony export loglistReviews */
+/* unused harmony export labelApprovedPullRequests */
 const core = __nccwpck_require__(2186);
 
-const loglistReviews = async (octokit, context) => {
+const labelApprovedPullRequests = async (octokit, context, numberOfApproves) => {
     const { data: result } = await octokit.request('GET /repos/{owner}/{repo}/pulls/{pull_number}/reviews', {
         owner: context.repo.owner,
         repo: context.repo.repo,
         pull_number: context.issue.number
     })
-    core.info(JSON.stringify(result))
-    const parsedReviews = parseReviews(result)
+    core.info(JSON.stringify(result));
+    const parsedReviews = parseReviews(result);
+    if (shouldBeLabeled(parsedReviews, numberOfApproves)) {
+        labelPullRequest(octokit, context);
+    }
     core.info(JSON.stringify(parsedReviews));
 }
 
-const parseReviews = (json_input) => {
-    const list_of_reviews = [];
-    for (var i = 0; i < json_input.length; i++) {
-        const reviewer = json_input[i].user.login;
-        const state = json_input[i].state;
-        if (state == "APPROVED" && !list_of_reviews.includes(reviewer)) {
-            list_of_reviews.push(reviewer)
+const parseReviews = (jsonInput) => {
+    const listOfReviews = [];
+    for (var i = 0; i < jsonInput.length; i++) {
+        const reviewer = jsonInput[i].user.login;
+        const state = jsonInput[i].state;
+        if (state == "APPROVED" && !listOfReviews.includes(reviewer)) {
+            listOfReviews.push(reviewer);
         }
     }
-    return list_of_reviews
+    return listOfReviews
 }
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (loglistReviews);
+const shouldBeLabeled = (reviewers, numberOfApproves) => {
+    return reviewers.length > numberOfApproves;
+}
+
+const labelPullRequest = async (octokit, context) => {
+    const { data: result } = await octokit.request('GET /repos/{owner}/{repo}/issues/{issue_number}/labels', {
+        owner: context.repo.owner,
+        repo: context.repo.repo,
+        issue_number: context.issue.number,
+        labels: "approved"
+    })
+    core.info(JSON.stringify(result))
+}
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (labelApprovedPullRequests);
 
 /***/ }),
 
@@ -8534,7 +8550,8 @@ async function run() {
     const labelerTrigger = core.getInput('labelerTrigger') === 'true';
 
     if (labelerTrigger) {
-      await label_approved(octokit, context);
+      const numberOfApproves = parseInt(core.getInput('labelerApproves'));
+      await label_approved(octokit, context, numberOfApproves);
     }
   } catch (error) {
     // core.setFailed(JSON.stringify(error));
