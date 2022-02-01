@@ -14,9 +14,10 @@ export const labelApprovedPullRequests = async (octokit, context, numberOfApprov
         try {
             removeLabelFromPullRequest(octokit, context);
         } catch (error) {
-            core.info("Couldn't find label 'approved'")
+            if (e instanceof HttpError) {
+                core.info("Couldn't find label 'approved'")
+            }
         }
-
     }
     core.info(JSON.stringify(parsedReviews));
 }
