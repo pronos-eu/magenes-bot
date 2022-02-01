@@ -8315,7 +8315,7 @@ const labelApprovedPullRequests = async (octokit, context, numberOfApproves) => 
         repo: context.repo.repo,
         pull_number: context.issue.number
     })
-    // core.info(JSON.stringify(result));
+    core.info(JSON.stringify(result));
     const parsedReviews = parseReviews(result);
     if (shouldBeLabeled(parsedReviews, numberOfApproves)) {
         addLabelToPullRequest(octokit, context);
