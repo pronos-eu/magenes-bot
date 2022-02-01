@@ -8,16 +8,16 @@ export const labelApprovedPullRequests = async (octokit, context, numberOfApprov
     })
     core.info(JSON.stringify(result));
     const parsedReviews = parseReviews(result);
-    if (shouldBeLabeled(parsedReviews, numberOfApproves)) {
-        addLabelToPullRequest(octokit, context);
-    } else {
-        try {
-            removeLabelFromPullRequest(octokit, context);
-        } catch (error) {
-            core.info("Couldn't find label 'approved'")
-        }
+    // if (shouldBeLabeled(parsedReviews, numberOfApproves)) {
+    //     addLabelToPullRequest(octokit, context);
+    // } else {
+    //     try {
+    //         removeLabelFromPullRequest(octokit, context);
+    //     } catch (error) {
+    //         core.info("Couldn't find label 'approved'")
+    //     }
 
-    }
+    // }
     core.info(JSON.stringify(parsedReviews));
 }
 
@@ -26,9 +26,16 @@ const parseReviews = (jsonInput) => {
     for (var i = 0; i < jsonInput.length; i++) {
         const reviewer = jsonInput[i].user.login;
         const state = jsonInput[i].state;
-        if (state == "APPROVED" && !listOfReviews.includes(reviewer)) {
-            listOfReviews.push(reviewer);
+        const timestamp = jsonInput[i].submitted_at;
+        if (listOfReviews.some(item => item.reviewer === reviewer)) {
+            item = { reviewer: reviewer, state: state, timestamp: timestamp }
+        } else {
+            listOfReviews.push({ reviewer: reviewer, state: state, timestamp: timestamp });
         }
+        // if (state == "APPROVED" && !listOfReviews.includes(reviewer)) {
+
+        //     listOfReviews.push({ reviewer: reviewer, state: state, timestamp: timestamp });
+        // }
     }
     return listOfReviews
 }
