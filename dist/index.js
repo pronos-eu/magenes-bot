@@ -8366,6 +8366,34 @@ const removeLabelFromPullRequest = async (octokit, context) => {
 
 /***/ }),
 
+/***/ 3458:
+/***/ ((__unused_webpack_module, __webpack_exports__, __nccwpck_require__) => {
+
+"use strict";
+/* harmony export */ __nccwpck_require__.d(__webpack_exports__, {
+/* harmony export */   "Z": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* unused harmony export showCodeCoverage */
+const core = __nccwpck_require__(2186);
+const exec = __nccwpck_require__(9526);
+
+const showCodeCoverage = async (octokit, context) => {
+    const codeCoverage = await exec.exec('npm run coverage');
+    core.info(codeCoverage);
+}
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (showCodeCoverage);
+
+/***/ }),
+
+/***/ 9526:
+/***/ ((module) => {
+
+module.exports = eval("require")("@actions/exec");
+
+
+/***/ }),
+
 /***/ 2877:
 /***/ ((module) => {
 
@@ -8555,6 +8583,7 @@ var __webpack_exports__ = {};
 const core = __nccwpck_require__(2186);
 const github = __nccwpck_require__(5438);
 const label_approved = __nccwpck_require__(2646)/* .default */ .Z
+const show_code_coverage = __nccwpck_require__(3458)/* .default */ .Z
 
 async function run() {
   try {
@@ -8570,7 +8599,7 @@ async function run() {
     }
 
     if (codeCoverageTrigger) {
-      await label_approved(octokit, context);
+      await show_code_coverage(octokit, context);
     }
   } catch (error) {
     core.setFailed(error.message)

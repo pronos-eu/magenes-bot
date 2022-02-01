@@ -1,6 +1,7 @@
 const core = require('@actions/core');
 const github = require('@actions/github');
 const label_approved = require('./plugins/label_approved').default
+const show_code_coverage = require('./plugins/show_code_coverage').default
 
 async function run() {
   try {
@@ -16,7 +17,7 @@ async function run() {
     }
 
     if (codeCoverageTrigger) {
-      await label_approved(octokit, context);
+      await show_code_coverage(octokit, context);
     }
   } catch (error) {
     core.setFailed(error.message)
