@@ -9644,9 +9644,8 @@ const removeLabelFromPullRequest = async (octokit, context) => {
 const core = __nccwpck_require__(2186);
 const exec = __nccwpck_require__(1514);
 
-const showCodeCoverage = async (octokit, context) => {
-    const codeCoverage = await exec.exec('ls');
-    core.info(codeCoverage);
+const showCodeCoverage = async (octokit, context, coverageReport) => {
+    core.info(coverageReport);
 }
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (showCodeCoverage);
@@ -9882,8 +9881,10 @@ async function run() {
     }
 
     if (codeCoverageTrigger) {
-      await show_code_coverage(octokit, context);
+      const coverageReport = core.getInput('coverageReport');
+      await show_code_coverage(octokit, context, coverageReport);
     }
+
   } catch (error) {
     core.setFailed(error.message)
   }

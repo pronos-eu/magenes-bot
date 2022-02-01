@@ -16,9 +16,9 @@ inputs:
     description: 'Run code coverage module'
     required: false
     default: false
-# outputs:
-#   time: # output will be available to future steps
-#     description: 'The current time after waiting'
+  coverageReport:
+    description: 'Code coverage report'
+    required: false
 runs:
   using: 'node12'
   main: 'dist/index.js'

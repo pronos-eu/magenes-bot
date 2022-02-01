@@ -17,8 +17,10 @@ async function run() {
     }
 
     if (codeCoverageTrigger) {
-      await show_code_coverage(octokit, context);
+      const coverageReport = core.getInput('coverageReport');
+      await show_code_coverage(octokit, context, coverageReport);
     }
+
   } catch (error) {
     core.setFailed(error.message)
   }
