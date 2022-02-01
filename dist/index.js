@@ -9882,6 +9882,8 @@ async function run() {
 
     if (codeCoverageTrigger) {
       const coverageReport = core.getInput('coverageReport');
+      core.info("COVERAGE REPORT: ")
+      core.info(coverageReport);
       await show_code_coverage(octokit, context, coverageReport);
     }
 
