@@ -27,13 +27,15 @@ const parseReviews = (jsonInput) => {
         const reviewer = jsonInput[i].user.login;
         const state = jsonInput[i].state;
         const timestamp = jsonInput[i].submitted_at;
-        reviews[reviewer] = { state, timestamp }
+        if (state == "APPROVED") {
+            reviews[reviewer] = { state, timestamp }
+        }
     }
     return reviews
 }
 
 const shouldBeLabeled = (reviewers, numberOfApproves) => {
-    return reviewers.length >= numberOfApproves;
+    return Object.keys(reviewers).length >= numberOfApproves;
 }
 
 const addLabelToPullRequest = async (octokit, context) => {
