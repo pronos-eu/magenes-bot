@@ -8320,13 +8320,7 @@ const labelApprovedPullRequests = async (octokit, context, numberOfApproves) => 
     if (shouldBeLabeled(parsedReviews, numberOfApproves)) {
         addLabelToPullRequest(octokit, context);
     } else {
-        try {
-            removeLabelFromPullRequest(octokit, context);
-        } catch (error) {
-            if (e instanceof HttpError) {
-                core.info("Couldn't find label 'approved'")
-            }
-        }
+        removeLabelFromPullRequest(octokit, context);
     }
     core.info(JSON.stringify(parsedReviews));
 }
@@ -8358,12 +8352,18 @@ const addLabelToPullRequest = async (octokit, context) => {
 }
 
 const removeLabelFromPullRequest = async (octokit, context) => {
-    const { data: result } = await octokit.request('DELETE /repos/{owner}/{repo}/issues/{issue_number}/labels/{name}', {
-        owner: context.repo.owner,
-        repo: context.repo.repo,
-        issue_number: context.issue.number,
-        name: "approved"
-    })
+    try {
+        await octokit.request('DELETE /repos/{owner}/{repo}/issues/{issue_number}/labels/{name}', {
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            issue_number: context.issue.number,
+            name: "approved"
+        })
+    } catch (error) {
+        if (e instanceof HttpError) {
+            core.info("Couldn't find label 'approved'")
+        }
+    }
     core.info(JSON.stringify(result))
 }
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (labelApprovedPullRequests);
