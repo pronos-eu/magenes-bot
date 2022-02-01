@@ -6,10 +6,9 @@ export const labelApprovedPullRequests = async (octokit, context, numberOfApprov
         repo: context.repo.repo,
         pull_number: context.issue.number
     })
-    core.info(JSON.stringify(result));
+    // core.info(JSON.stringify(result));
     const parsedReviews = parseReviews(result);
     if (shouldBeLabeled(parsedReviews, numberOfApproves)) {
-        core.info("I'M IN THE ZONE")
         labelPullRequest(octokit, context);
     }
     core.info(JSON.stringify(parsedReviews));
@@ -32,8 +31,7 @@ const shouldBeLabeled = (reviewers, numberOfApproves) => {
 }
 
 const labelPullRequest = async (octokit, context) => {
-    core.info("LABELING")
-    const { data: result } = await octokit.request('GET /repos/{owner}/{repo}/issues/{issue_number}/labels', {
+    const { data: result } = await octokit.request('POST /repos/{owner}/{repo}/issues/{issue_number}/labels', {
         owner: context.repo.owner,
         repo: context.repo.repo,
         issue_number: context.issue.number,
