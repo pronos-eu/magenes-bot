@@ -6,14 +6,12 @@ export const labelApprovedPullRequests = async (octokit, context, numberOfApprov
         repo: context.repo.repo,
         pull_number: context.issue.number
     })
-    core.info(JSON.stringify(result));
     const parsedReviews = parseReviews(result);
     if (shouldBeLabeled(parsedReviews, numberOfApproves)) {
         addLabelToPullRequest(octokit, context);
     } else {
         removeLabelFromPullRequest(octokit, context);
     }
-    core.info(JSON.stringify(parsedReviews));
 }
 
 const parseReviews = (jsonInput) => {
@@ -39,7 +37,6 @@ const addLabelToPullRequest = async (octokit, context) => {
         issue_number: context.issue.number,
         labels: ["approved"]
     })
-    core.info(JSON.stringify(result))
 }
 
 const removeLabelFromPullRequest = async (octokit, context) => {
