@@ -8365,7 +8365,6 @@ const removeLabelFromPullRequest = async (octokit, context) => {
             core.info(error)
         }
     }
-    core.info(JSON.stringify(result))
 }
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (labelApprovedPullRequests);
 
@@ -8573,7 +8572,6 @@ async function run() {
       await label_approved(octokit, context, numberOfApproves);
     }
   } catch (error) {
-    // core.setFailed(JSON.stringify(error));
     core.setFailed(error.message)
   }
 }

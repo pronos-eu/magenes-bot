@@ -56,6 +56,5 @@ const removeLabelFromPullRequest = async (octokit, context) => {
             core.info(error)
         }
     }
-    core.info(JSON.stringify(result))
 }
 export default labelApprovedPullRequests
