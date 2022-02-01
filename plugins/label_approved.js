@@ -22,20 +22,14 @@ export const labelApprovedPullRequests = async (octokit, context, numberOfApprov
 }
 
 const parseReviews = (jsonInput) => {
-    // const listOfReviews = [];
     const reviews = {};
     for (var i = 0; i < jsonInput.length; i++) {
         const reviewer = jsonInput[i].user.login;
         const state = jsonInput[i].state;
         const timestamp = jsonInput[i].submitted_at;
-
-        if (reviewer in reviews) {
-            reviews[reviewer] = { state, timestamp }
-        } else {
-            reviews[reviewer] = { state, timestamp }
-        }
+        reviews[reviewer] = { state, timestamp }
     }
-    return listOfReviews
+    return reviews
 }
 
 const shouldBeLabeled = (reviewers, numberOfApproves) => {
