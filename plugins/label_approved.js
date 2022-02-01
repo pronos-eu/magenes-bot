@@ -51,7 +51,7 @@ const removeLabelFromPullRequest = async (octokit, context) => {
             name: "approved"
         })
     } catch (error) {
-        if (e instanceof HttpError) {
+        if (error instanceof HttpError) {
             core.info("Couldn't find label 'approved'")
         }
     }
