@@ -8318,7 +8318,14 @@ const labelApprovedPullRequests = async (octokit, context, numberOfApproves) => 
     // core.info(JSON.stringify(result));
     const parsedReviews = parseReviews(result);
     if (shouldBeLabeled(parsedReviews, numberOfApproves)) {
-        labelPullRequest(octokit, context);
+        addLabelToPullRequest(octokit, context);
+    } else {
+        try {
+            removeLabelFromPullRequest(octokit, context);
+        } catch (error) {
+            core.info("Couldn't remove label 'approved'")
+        }
+
     }
     core.info(JSON.stringify(parsedReviews));
 }
@@ -8339,12 +8346,22 @@ const shouldBeLabeled = (reviewers, numberOfApproves) => {
     return reviewers.length >= numberOfApproves;
 }
 
-const labelPullRequest = async (octokit, context) => {
+const addLabelToPullRequest = async (octokit, context) => {
     const { data: result } = await octokit.request('POST /repos/{owner}/{repo}/issues/{issue_number}/labels', {
         owner: context.repo.owner,
         repo: context.repo.repo,
         issue_number: context.issue.number,
         labels: ["approved"]
+    })
+    core.info(JSON.stringify(result))
+}
+
+const removeLabelFromPullRequest = async (octokit, context) => {
+    const { data: result } = await octokit.request('DELETE /repos/{owner}/{repo}/issues/{issue_number}/labels/{name}', {
+        owner: context.repo.owner,
+        repo: context.repo.repo,
+        issue_number: context.issue.number,
+        name: "approved"
     })
     core.info(JSON.stringify(result))
 }
