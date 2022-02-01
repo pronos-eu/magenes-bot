@@ -52,8 +52,7 @@ const removeLabelFromPullRequest = async (octokit, context) => {
         })
     } catch (error) {
         if (error.message.includes("Label does not exist")) {
-            core.info("ERROR: ")
-            core.info(error)
+            core.info("Label does not exist, skipping label removal")
         }
     }
 }
