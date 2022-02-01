@@ -28,7 +28,7 @@ const parseReviews = (jsonInput) => {
 }
 
 const shouldBeLabeled = (reviewers, numberOfApproves) => {
-    return reviewers.length > numberOfApproves;
+    return reviewers.length >= numberOfApproves;
 }
 
 const labelPullRequest = async (octokit, context) => {
