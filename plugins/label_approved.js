@@ -51,8 +51,7 @@ const removeLabelFromPullRequest = async (octokit, context) => {
             name: "approved"
         })
     } catch (error) {
-        if (error) {
-            // core.info("Couldn't find label 'approved'")
+        if (error.includes("Label does not exist")) {
             core.info("ERROR: ")
             core.info(error)
         }
