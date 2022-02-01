@@ -8331,17 +8331,18 @@ const labelApprovedPullRequests = async (octokit, context, numberOfApproves) => 
 }
 
 const parseReviews = (jsonInput) => {
-    const listOfReviews = [];
+    // const listOfReviews = [];
+    const reviews = {};
     for (var i = 0; i < jsonInput.length; i++) {
         const reviewer = jsonInput[i].user.login;
         const state = jsonInput[i].state;
         const timestamp = jsonInput[i].submitted_at;
-        listOfReviews.push({ reviewer: reviewer, state: state, timestamp: timestamp });
 
-        // if (state == "APPROVED" && !listOfReviews.includes(reviewer)) {
-
-        //     listOfReviews.push({ reviewer: reviewer, state: state, timestamp: timestamp });
-        // }
+        if (reviewer in reviews) {
+            reviews[reviewer] = { state, timestamp }
+        } else {
+            reviews[reviewer] = { state, timestamp }
+        }
     }
     return listOfReviews
 }
