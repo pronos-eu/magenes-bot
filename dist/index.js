@@ -9645,7 +9645,7 @@ const core = __nccwpck_require__(2186);
 const exec = __nccwpck_require__(1514);
 
 const showCodeCoverage = async (octokit, context) => {
-    const codeCoverage = await exec.exec('npm run coverage');
+    const codeCoverage = await exec.exec('ls');
     core.info(codeCoverage);
 }
 

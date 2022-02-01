@@ -12,6 +12,10 @@ inputs:
     description: 'Number of approves required to label a Pull Request (Labeler module)'
     required: false
     default: 2
+  codeCoverageTrigger:
+    description: 'Run code coverage module'
+    required: false
+    default: false
 # outputs:
 #   time: # output will be available to future steps
 #     description: 'The current time after waiting'
