@@ -26,6 +26,7 @@ async function run() {
       core.info(coverageBranches);
       core.info(coverageFunctions);
       core.info(coverageLines);
+      const coverageReport = [coverageStatements, coverageBranches, coverageFunctions, coverageLines]
       await show_code_coverage(octokit, context, coverageReport);
     }
 
