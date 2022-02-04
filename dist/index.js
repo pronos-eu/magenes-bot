@@ -9646,8 +9646,25 @@ const exec = __nccwpck_require__(1514);
 
 const showCodeCoverage = async (octokit, context, coverageReport) => {
     core.info(coverageReport);
+    createComment(octokit, context, coverageReport)
 }
 
+const createComment = async (octokit, context, coverageReport) => {
+    try {
+        await octokit.request('POST /repos/{owner}/{repo}/pulls/{pull_number}/comments', {
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            pull_number: context.issue.number,
+            body:
+                coverageReport[0] + '\n' +
+                coverageReport[1] + '\n' +
+                coverageReport[2] + '\n' +
+                coverageReport[3]
+        })
+    } catch (error) {
+        core.info("Could not create comment")
+    }
+}
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (showCodeCoverage);
 
 /***/ }),
@@ -9886,10 +9903,6 @@ async function run() {
       const coverageFunctions = core.getInput('coverageFunctions');
       const coverageLines = core.getInput('coverageLines');
       core.info("COVERAGE REPORT: ")
-      core.info(coverageStatements);
-      core.info(coverageBranches);
-      core.info(coverageFunctions);
-      core.info(coverageLines);
       const coverageReport = [coverageStatements, coverageBranches, coverageFunctions, coverageLines]
       await show_code_coverage(octokit, context, coverageReport);
     }
