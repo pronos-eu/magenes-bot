@@ -12,14 +12,10 @@ const createComment = async (octokit, context, coverageReport) => {
             owner: context.repo.owner,
             repo: context.repo.repo,
             pull_number: context.issue.number,
-            body:
-                coverageReport[0] + '\n' +
-                coverageReport[1] + '\n' +
-                coverageReport[2] + '\n' +
-                coverageReport[3]
+            body: coverageReport[0]
         })
     } catch (error) {
-        core.info("Could not create comment")
+        core.info(error.message)
     }
 }
 export default showCodeCoverage
