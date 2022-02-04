@@ -9655,7 +9655,10 @@ const createComment = async (octokit, context, coverageReport) => {
             owner: context.repo.owner,
             repo: context.repo.repo,
             pull_number: context.issue.number,
-            body: coverageReport[0],
+            body: coverageReport[0] + "\n" +
+                coverageReport[1] + "\n" +
+                coverageReport[2] + "\n" +
+                coverageReport[3],
         })
     } catch (error) {
         core.info(error.message)
