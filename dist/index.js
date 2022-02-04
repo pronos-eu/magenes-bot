@@ -9881,9 +9881,15 @@ async function run() {
     }
 
     if (codeCoverageTrigger) {
-      const coverageReport = core.getInput('coverageReport');
+      const coverageStatements = core.getInput('coverageStatements');
+      const coverageBranches = core.getInput('coverageBranches');
+      const coverageFunctions = core.getInput('coverageFunctions');
+      const coverageLines = core.getInput('coverageLines');
       core.info("COVERAGE REPORT: ")
-      core.info(coverageReport);
+      core.info(coverageStatements);
+      core.info(coverageBranches);
+      core.info(coverageFunctions);
+      core.info(coverageLines);
       await show_code_coverage(octokit, context, coverageReport);
     }
 
