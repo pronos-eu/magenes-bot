@@ -16,8 +16,17 @@ inputs:
     description: 'Run code coverage module'
     required: false
     default: false
-  coverageReport:
-    description: 'Code coverage report'
+  coverageStatements:
+    description: 'Code coverage statements'
+    required: false
+  coverageBranches:
+    description: 'Code coverage branches'
+    required: false
+  coverageFunctions:
+    description: 'Code coverage functions'
+    required: false
+  coverageLines:
+    description: 'Code coverage lines'
     required: false
 runs:
   using: 'node12'
