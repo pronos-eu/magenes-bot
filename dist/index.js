@@ -9651,12 +9651,11 @@ const showCodeCoverage = async (octokit, context, coverageReport) => {
 
 const createComment = async (octokit, context, coverageReport) => {
     try {
-        await octokit.request('POST /repos/{owner}/{repo}/pulls/{pull_number}/comments', {
+        await octokit.request('POST /repos/{owner}/{repo}/issues/{pull_number}/comments', {
             owner: context.repo.owner,
             repo: context.repo.repo,
             pull_number: context.issue.number,
             body: coverageReport[0],
-            commit_id: context.repo.commit_id
         })
     } catch (error) {
         core.info(error.message)
