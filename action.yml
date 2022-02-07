@@ -28,6 +28,10 @@ inputs:
   coverageLines:
     description: 'Code coverage lines'
     required: false
+  linterTrigger:
+    description: 'Run linter module'
+    required: false
+    default: false
 runs:
   using: 'node12'
   main: 'dist/index.js'

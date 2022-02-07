@@ -10,6 +10,7 @@ async function run() {
     const context = github.context;
     const labelerTrigger = core.getInput('labelerTrigger') === 'true';
     const codeCoverageTrigger = core.getInput('codeCoverageTrigger') === 'true';
+    const linterTrigger = core.getInput('linterTrigger') === 'true';
 
     if (labelerTrigger) {
       const numberOfApproves = parseInt(core.getInput('labelerApproves'));
@@ -24,6 +25,10 @@ async function run() {
       core.info("COVERAGE REPORT: ")
       const coverageReport = [coverageStatements, coverageBranches, coverageFunctions, coverageLines]
       await show_code_coverage(octokit, context, coverageReport);
+    }
+
+    if (linterTrigger) {
+      await lint_code(octokit, context);
     }
 
   } catch (error) {
