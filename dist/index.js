@@ -8378,7 +8378,7 @@ const core = __nccwpck_require__(2186);
 
 const lintModifiedFiles = async (octokit, context) => {
     modifiedFiles = getModifiedFiles(octokit, context);
-    core.info(modifiedFiles);
+    // core.info(modifiedFiles);
 }
 
 const getModifiedFiles = async (octokit, context) => {
@@ -8388,9 +8388,10 @@ const getModifiedFiles = async (octokit, context) => {
             repo: context.repo.repo,
             pull_number: context.issue.number,
         })
+        core.info(modifiedFiles);
         return modifiedFiles;
     } catch (error) {
-        core.info(error.message)
+        core.info(error.message);
     }
 }
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (lintModifiedFiles);
