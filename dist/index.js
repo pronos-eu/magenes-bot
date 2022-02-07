@@ -8388,6 +8388,7 @@ const getModifiedFiles = async (octokit, context) => {
             repo: context.repo.repo,
             pull_number: context.issue.number,
         })
+        core.info(JSON.stringify(modifiedFiles));
         return modifiedFiles;
     } catch (error) {
         core.info(error.message);
