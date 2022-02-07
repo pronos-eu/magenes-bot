@@ -1,8 +1,18 @@
 const core = require('@actions/core');
 
 export const lintModifiedFiles = async (octokit, context) => {
-    modifiedFiles = getModifiedFiles(octokit, context);
-    core.info(modifiedFiles);
+    const modifiedFiles = getModifiedFiles(octokit, context);
+    const listOfFiles = parseModifiedFiles(modifiedFiles);
+    core.info(listOfFiles)
+}
+
+const parseModifiedFiles = (modifiedFiles) => {
+    const filenames = {};
+    for (var i = 0; i < modifiedFiles.length; i++) {
+        const filename = modifiedFiles[i].filename;
+        filenames[filename] = { filename }
+    }
+    return filenames
 }
 
 const getModifiedFiles = async (octokit, context) => {
@@ -12,7 +22,6 @@ const getModifiedFiles = async (octokit, context) => {
             repo: context.repo.repo,
             pull_number: context.issue.number,
         })
-        core.info(JSON.stringify(modifiedFiles));
         return modifiedFiles;
     } catch (error) {
         core.info(error.message);
