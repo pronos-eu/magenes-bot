@@ -12,9 +12,22 @@ inputs:
     description: 'Number of approves required to label a Pull Request (Labeler module)'
     required: false
     default: 2
-# outputs:
-#   time: # output will be available to future steps
-#     description: 'The current time after waiting'
+  codeCoverageTrigger:
+    description: 'Run code coverage module'
+    required: false
+    default: false
+  coverageStatements:
+    description: 'Code coverage statements'
+    required: false
+  coverageBranches:
+    description: 'Code coverage branches'
+    required: false
+  coverageFunctions:
+    description: 'Code coverage functions'
+    required: false
+  coverageLines:
+    description: 'Code coverage lines'
+    required: false
 runs:
   using: 'node12'
   main: 'dist/index.js'
