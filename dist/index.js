@@ -8379,7 +8379,7 @@ const core = __nccwpck_require__(2186);
 const lintModifiedFiles = async (octokit, context) => {
     const modifiedFiles = getModifiedFiles(octokit, context);
     const listOfFiles = parseModifiedFiles(modifiedFiles);
-    core.info(listOfFiles)
+    core.info(JSON.stringify(listOfFiles))
 }
 
 const parseModifiedFiles = (modifiedFiles) => {
