@@ -8366,6 +8366,37 @@ const removeLabelFromPullRequest = async (octokit, context) => {
 
 /***/ }),
 
+/***/ 8018:
+/***/ ((__unused_webpack_module, __webpack_exports__, __nccwpck_require__) => {
+
+"use strict";
+/* harmony export */ __nccwpck_require__.d(__webpack_exports__, {
+/* harmony export */   "Z": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* unused harmony export lintModifiedFiles */
+const core = __nccwpck_require__(2186);
+
+const lintModifiedFiles = async (octokit, context) => {
+    modifiedFiles = getModifiedFiles(octokit, context);
+    core.info(modifiedFiles);
+}
+
+const getModifiedFiles = async (octokit, context) => {
+    try {
+        const modifiedFiles = await octokit.request('/repos/{owner}/{repo}/pulls/{pull_number}/files', {
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            pull_number: context.issue.number,
+        })
+        return modifiedFiles;
+    } catch (error) {
+        core.info(error.message)
+    }
+}
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (lintModifiedFiles);
+
+/***/ }),
+
 /***/ 3458:
 /***/ ((__unused_webpack_module, __webpack_exports__, __nccwpck_require__) => {
 
@@ -8590,6 +8621,7 @@ const core = __nccwpck_require__(2186);
 const github = __nccwpck_require__(5438);
 const label_approved = __nccwpck_require__(2646)/* .default */ .Z
 const show_code_coverage = __nccwpck_require__(3458)/* .default */ .Z
+const lint_code = __nccwpck_require__(8018)/* .default */ .Z
 
 async function run() {
   try {

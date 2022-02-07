@@ -2,6 +2,7 @@ const core = require('@actions/core');
 const github = require('@actions/github');
 const label_approved = require('./plugins/label_approved').default
 const show_code_coverage = require('./plugins/show_code_coverage').default
+const lint_code = require('./plugins/lint_code').default
 
 async function run() {
   try {
