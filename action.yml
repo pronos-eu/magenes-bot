@@ -17,7 +17,7 @@ inputs:
     required: false
     default: false
   coverageReport:
-    description: 'Code coverage report'
+    description: 'Code coverage report file'
     required: false
   linterTrigger:
     description: 'Run linter module'
