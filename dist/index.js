@@ -8390,7 +8390,7 @@ const parseModifiedFiles = (modifiedFiles) => {
 
         filenames.add(filename);
     }
-    core.info(filenames)
+    core.info(JSON.stringify(filenames));
     return filenames
 }
 
