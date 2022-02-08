@@ -8423,7 +8423,6 @@ const showCodeCoverage = async (octokit, context, coverageReport) => {
 }
 
 const parseCoverageReport = (coverageReport) => {
-    coverageReport = "{ " + coverageReport + " }";
     const parsedCoverageReport = JSON.parse(coverageReport);
     const statementsJson = parsedCoverageReport.total.statements;
     const branchesJson = parsedCoverageReport.total.branches;
