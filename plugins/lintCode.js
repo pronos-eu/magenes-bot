@@ -11,6 +11,7 @@ const parseModifiedFiles = (modifiedFiles) => {
     for (var i = 0; i < modifiedFiles.data.length; i++) {
         const filename = modifiedFiles.data[i].filename;
         filenames.add(filename);
+        core.info(filename)
     }
     core.info(JSON.stringify(filenames));
     return filenames
