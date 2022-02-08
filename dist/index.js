@@ -8434,8 +8434,7 @@ const parseCoverageReport = (coverageReport) => {
     const functions = "Functions: " + functionsJson.pct + "% " + "(" + functionsJson.covered + "/" + functionsJson.total + ")";
     const lines = "Lines: " + linesJson.pct + "% " + "(" + linesJson.covered + "/" + linesJson.total + ")";
     const topLine = "============== CODE COVERAGE ==============";
-    const bottomLine = "===========================================";
-    return [topLine, statements, branches, functions, lines, bottomLine].join('\n')
+    return [topLine, statements, branches, functions, lines].join('\n')
 }
 
 const createComment = async (octokit, context, coverageReport) => {
