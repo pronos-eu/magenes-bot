@@ -16,17 +16,8 @@ inputs:
     description: 'Run code coverage module'
     required: false
     default: false
-  coverageStatements:
-    description: 'Code coverage statements'
-    required: false
-  coverageBranches:
-    description: 'Code coverage branches'
-    required: false
-  coverageFunctions:
-    description: 'Code coverage functions'
-    required: false
-  coverageLines:
-    description: 'Code coverage lines'
+  coverage:
+    description: 'Code coverage'
     required: false
   linterTrigger:
     description: 'Run linter module'
