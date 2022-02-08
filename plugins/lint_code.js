@@ -9,7 +9,8 @@ export const lintModifiedFiles = async (octokit, context) => {
 const parseModifiedFiles = (modifiedFiles) => {
     const filenames = new Set();
     for (var i = 0; i < modifiedFiles.length; i++) {
-        const filename = modifiedFiles[i].filename;
+        // const filename = modifiedFiles[i].filename;
+        const filename = modifiedFiles[i];
         filenames.add(filename);
     }
     return filenames
