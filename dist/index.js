@@ -8630,9 +8630,9 @@ var __webpack_exports__ = {};
 (() => {
 const core = __nccwpck_require__(2186);
 const github = __nccwpck_require__(5438);
-const label_approved = __nccwpck_require__(2797)/* .default */ .Z
-const show_code_coverage = __nccwpck_require__(1581)/* .default */ .Z
-const lint_code = __nccwpck_require__(5409)/* .default */ .Z
+const labelApproved = __nccwpck_require__(2797)/* .default */ .Z
+const showCodeCoverage = __nccwpck_require__(1581)/* .default */ .Z
+const lintCode = __nccwpck_require__(5409)/* .default */ .Z
 
 async function run() {
   try {

@@ -1,8 +1,8 @@
 const core = require('@actions/core');
 const github = require('@actions/github');
-const label_approved = require('./plugins/labelApproved').default
-const show_code_coverage = require('./plugins/showCodeCoverage').default
-const lint_code = require('./plugins/lintCode').default
+const labelApproved = require('./plugins/labelApproved').default
+const showCodeCoverage = require('./plugins/showCodeCoverage').default
+const lintCode = require('./plugins/lintCode').default
 
 async function run() {
   try {
