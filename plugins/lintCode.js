@@ -3,7 +3,7 @@ const core = require('@actions/core');
 export const lintModifiedFiles = async (octokit, context) => {
     const modifiedFiles = await getModifiedFiles(octokit, context);
     const listOfFiles = parseModifiedFiles(modifiedFiles);
-    core.info(JSON.stringify(listOfFiles))
+    // core.info(JSON.stringify(listOfFiles))
 }
 
 const parseModifiedFiles = (modifiedFiles) => {

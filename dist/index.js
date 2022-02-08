@@ -8299,7 +8299,7 @@ function wrappy (fn, cb) {
 
 /***/ }),
 
-/***/ 2646:
+/***/ 2797:
 /***/ ((__unused_webpack_module, __webpack_exports__, __nccwpck_require__) => {
 
 "use strict";
@@ -8366,7 +8366,7 @@ const removeLabelFromPullRequest = async (octokit, context) => {
 
 /***/ }),
 
-/***/ 8018:
+/***/ 5409:
 /***/ ((__unused_webpack_module, __webpack_exports__, __nccwpck_require__) => {
 
 "use strict";
@@ -8379,7 +8379,7 @@ const core = __nccwpck_require__(2186);
 const lintModifiedFiles = async (octokit, context) => {
     const modifiedFiles = await getModifiedFiles(octokit, context);
     const listOfFiles = parseModifiedFiles(modifiedFiles);
-    core.info(JSON.stringify(listOfFiles))
+    // core.info(JSON.stringify(listOfFiles))
 }
 
 const parseModifiedFiles = (modifiedFiles) => {
@@ -8408,7 +8408,7 @@ const getModifiedFiles = async (octokit, context) => {
 
 /***/ }),
 
-/***/ 3458:
+/***/ 1581:
 /***/ ((__unused_webpack_module, __webpack_exports__, __nccwpck_require__) => {
 
 "use strict";
@@ -8630,9 +8630,9 @@ var __webpack_exports__ = {};
 (() => {
 const core = __nccwpck_require__(2186);
 const github = __nccwpck_require__(5438);
-const label_approved = __nccwpck_require__(2646)/* .default */ .Z
-const show_code_coverage = __nccwpck_require__(3458)/* .default */ .Z
-const lint_code = __nccwpck_require__(8018)/* .default */ .Z
+const label_approved = __nccwpck_require__(2797)/* .default */ .Z
+const show_code_coverage = __nccwpck_require__(1581)/* .default */ .Z
+const lint_code = __nccwpck_require__(5409)/* .default */ .Z
 
 async function run() {
   try {
@@ -8645,7 +8645,7 @@ async function run() {
 
     if (labelerTrigger) {
       const numberOfApproves = parseInt(core.getInput('labelerApproves'));
-      await label_approved(octokit, context, numberOfApproves);
+      await labelApproved(octokit, context, numberOfApproves);
     }
 
     if (codeCoverageTrigger) {
@@ -8653,13 +8653,12 @@ async function run() {
       const coverageBranches = core.getInput('coverageBranches');
       const coverageFunctions = core.getInput('coverageFunctions');
       const coverageLines = core.getInput('coverageLines');
-      core.info("COVERAGE REPORT: ")
       const coverageReport = [coverageStatements, coverageBranches, coverageFunctions, coverageLines]
-      await show_code_coverage(octokit, context, coverageReport);
+      await showCodeCoverage(octokit, context, coverageReport);
     }
 
     if (linterTrigger) {
-      await lint_code(octokit, context);
+      await lintCode(octokit, context);
     }
 
   } catch (error) {
