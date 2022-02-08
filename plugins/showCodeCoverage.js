@@ -9,10 +9,10 @@ export const showCodeCoverage = async (octokit, context, coverageReport) => {
 const parseCoverageReport = (coverageReport) => {
     coverageReport = "{ " + coverageReport + " }";
     const parsedCoverageReport = JSON.parse(coverageReport);
-    const statementsJson = parseCoverageReport.total.statements;
-    const branchesJson = parseCoverageReport.total.branches;
-    const functionsJson = parseCoverageReport.total.functions;
-    const linesJson = parseCoverageReport.total.lines;
+    const statementsJson = parsedCoverageReport.total.statements;
+    const branchesJson = parsedCoverageReport.total.branches;
+    const functionsJson = parsedCoverageReport.total.functions;
+    const linesJson = parsedCoverageReport.total.lines;
     const statements = "Statements: " + statementsJson.pct + "% " + "(" + statementsJson.covered + "/" + statementsJson.total + ")";
     const branches = "Branches: " + branchesJson.pct + "% " + "(" + branchesJson.covered + "/" + branchesJson.total + ")";
     const functions = "Functions: " + functionsJson.pct + "% " + "(" + functionsJson.covered + "/" + functionsJson.total + ")";
