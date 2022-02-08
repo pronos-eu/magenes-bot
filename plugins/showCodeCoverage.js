@@ -1,14 +1,14 @@
 const core = require('@actions/core');
 
 export const showCodeCoverage = async (octokit, context, coverageReport) => {
-    core.info(coverageReport);
     const parsedCoverageReport = parseCoverageReport(coverageReport);
     // createComment(octokit, context, parsedCoverageReport)
 }
 
 const parseCoverageReport = (coverageReport) => {
-    core.info(coverageReport);
+    coverageReport = "{ " + coverageReport + " }";
     parsedCoverageReport = JSON.parse(coverageReport);
+    core.info(JSON.stringify(coverageReport));
 }
 
 const createComment = async (octokit, context, coverageReport) => {
