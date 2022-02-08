@@ -8387,8 +8387,10 @@ const parseModifiedFiles = (modifiedFiles) => {
     for (var i = 0; i < modifiedFiles.length; i++) {
         // const filename = modifiedFiles[i].filename;
         const filename = modifiedFiles[i];
+
         filenames.add(filename);
     }
+    core.info(filenames)
     return filenames
 }
 
