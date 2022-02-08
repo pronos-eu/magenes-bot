@@ -7,8 +7,8 @@ export const showCodeCoverage = async (octokit, context, coverageReport) => {
 
 const parseCoverageReport = (coverageReport) => {
     coverageReport = "{ " + coverageReport + " }";
-    parsedCoverageReport = JSON.parse(coverageReport);
-    core.info(JSON.stringify(coverageReport));
+    const parsedCoverageReport = JSON.parse(coverageReport);
+    core.info(JSON.stringify(parsedCoverageReport));
 }
 
 const createComment = async (octokit, context, coverageReport) => {
