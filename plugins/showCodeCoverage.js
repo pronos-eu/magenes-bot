@@ -2,8 +2,7 @@ const core = require('@actions/core');
 
 export const showCodeCoverage = async (octokit, context, coverageReport) => {
     const parsedCoverageReport = parseCoverageReport(coverageReport);
-    core.info(parsedCoverageReport);
-    // createComment(octokit, context, parsedCoverageReport)
+    createComment(octokit, context, parsedCoverageReport)
 }
 
 const parseCoverageReport = (coverageReport) => {
@@ -19,7 +18,7 @@ const parseCoverageReport = (coverageReport) => {
     const lines = "Lines: " + linesJson.pct + "% " + "(" + linesJson.covered + "/" + linesJson.total + ")";
     const topLine = "============== CODE COVERAGE ==============";
     const bottomLine = "===========================================";
-    return [topLine, statements, branches, functions, lines, bottomLine]
+    return [topLine, statements, branches, functions, lines, bottomLine].join('\n')
 }
 
 const createComment = async (octokit, context, coverageReport) => {
