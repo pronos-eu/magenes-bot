@@ -16,8 +16,8 @@ inputs:
     description: 'Run code coverage module'
     required: false
     default: false
-  coverage:
-    description: 'Code coverage'
+  coverageReport:
+    description: 'Code coverage report'
     required: false
   linterTrigger:
     description: 'Run linter module'

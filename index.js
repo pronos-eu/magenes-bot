@@ -19,11 +19,7 @@ async function run() {
     }
 
     if (codeCoverageTrigger) {
-      const coverageStatements = core.getInput('coverageStatements');
-      const coverageBranches = core.getInput('coverageBranches');
-      const coverageFunctions = core.getInput('coverageFunctions');
-      const coverageLines = core.getInput('coverageLines');
-      const coverageReport = [coverageStatements, coverageBranches, coverageFunctions, coverageLines]
+      const coverageReport = core.getInput('coverageReport');
       await showCodeCoverage(octokit, context, coverageReport);
     }
 

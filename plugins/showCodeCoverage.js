@@ -2,7 +2,13 @@ const core = require('@actions/core');
 
 export const showCodeCoverage = async (octokit, context, coverageReport) => {
     core.info(coverageReport);
-    createComment(octokit, context, coverageReport)
+    const parsedCoverageReport = parseCoverageReport(coverageReport);
+    // createComment(octokit, context, parsedCoverageReport)
+}
+
+const parseCoverageReport = (coverageReport) => {
+    core.info(coverageReport);
+    parsedCoverageReport = JSON.parse(coverageReport);
 }
 
 const createComment = async (octokit, context, coverageReport) => {
@@ -11,10 +17,7 @@ const createComment = async (octokit, context, coverageReport) => {
             owner: context.repo.owner,
             repo: context.repo.repo,
             pull_number: context.issue.number,
-            body: coverageReport[0] + "\n" +
-                coverageReport[1] + "\n" +
-                coverageReport[2] + "\n" +
-                coverageReport[3],
+            body: coverageReport
         })
     } catch (error) {
         core.info(error.message)

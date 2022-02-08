@@ -8419,7 +8419,13 @@ const core = __nccwpck_require__(2186);
 
 const showCodeCoverage = async (octokit, context, coverageReport) => {
     core.info(coverageReport);
-    createComment(octokit, context, coverageReport)
+    const parsedCoverageReport = parseCoverageReport(coverageReport);
+    // createComment(octokit, context, parsedCoverageReport)
+}
+
+const parseCoverageReport = (coverageReport) => {
+    core.info(coverageReport);
+    parsedCoverageReport = JSON.parse(coverageReport);
 }
 
 const createComment = async (octokit, context, coverageReport) => {
@@ -8428,10 +8434,7 @@ const createComment = async (octokit, context, coverageReport) => {
             owner: context.repo.owner,
             repo: context.repo.repo,
             pull_number: context.issue.number,
-            body: coverageReport[0] + "\n" +
-                coverageReport[1] + "\n" +
-                coverageReport[2] + "\n" +
-                coverageReport[3],
+            body: coverageReport
         })
     } catch (error) {
         core.info(error.message)
@@ -8648,11 +8651,7 @@ async function run() {
     }
 
     if (codeCoverageTrigger) {
-      const coverageStatements = core.getInput('coverageStatements');
-      const coverageBranches = core.getInput('coverageBranches');
-      const coverageFunctions = core.getInput('coverageFunctions');
-      const coverageLines = core.getInput('coverageLines');
-      const coverageReport = [coverageStatements, coverageBranches, coverageFunctions, coverageLines]
+      const coverageReport = core.getInput('coverageReport');
       await showCodeCoverage(octokit, context, coverageReport);
     }
 
