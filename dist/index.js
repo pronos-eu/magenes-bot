@@ -8384,12 +8384,11 @@ const lintModifiedFiles = async (octokit, context) => {
 
 const parseModifiedFiles = (modifiedFiles) => {
     const filenames = new Set();
-    core.info(modifiedFiles.data.length);
     for (var i = 0; i < modifiedFiles.data.length; i++) {
         const filename = modifiedFiles.data[i].filename;
-        core.info(JSON.stringify(filename));
         filenames.add(filename);
     }
+    core.info(JSON.stringify(filenames));
     return filenames
 }
 
