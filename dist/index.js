@@ -8377,20 +8377,19 @@ const removeLabelFromPullRequest = async (octokit, context) => {
 const core = __nccwpck_require__(2186);
 
 const lintModifiedFiles = async (octokit, context) => {
-    const modifiedFiles = getModifiedFiles(octokit, context);
+    const modifiedFiles = await getModifiedFiles(octokit, context);
     const listOfFiles = parseModifiedFiles(modifiedFiles);
     core.info(JSON.stringify(listOfFiles))
 }
 
 const parseModifiedFiles = (modifiedFiles) => {
-    core.info(modifiedFiles)
+    // core.info(modifiedFiles)
     const filenames = new Set();
-    // for (var i = 0; i < modifiedFiles.length; i++) {
-    //     // const filename = modifiedFiles[i].filename;
-    //     const filename = modifiedFiles[i];
-    //     core.info(modifiedFiles[i])
-    //     filenames.add(filename);
-    // }
+    for (var i = 0; i < modifiedFiles.length; i++) {
+        const filename = modifiedFiles[i].filename;
+        // core.info(modifiedFiles[i].filename)
+        filenames.add(filename);
+    }
     // core.info(JSON.stringify(filenames));
     return filenames
 }
